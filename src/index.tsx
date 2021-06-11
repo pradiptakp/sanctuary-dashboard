@@ -29,16 +29,19 @@ const contextClass = {
 };
 
 export const App = () => {
-  const [cookies] = useCookies(["token"]);
+  const [cookies] = useCookies(["token", "keyrock_token"]);
 
-  if (cookies.token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.token}`;
+  if (cookies.token && cookies.keyrock_token) {
+    axios.defaults.headers.common["X-Auth-Token"] = `${cookies.token}`;
+    axios.defaults.headers.common[
+      "X-Keyrock-Token"
+    ] = `${cookies.keyrock_token}`;
   }
   return (
     <ReduxProvider store={store}>
       <BrowserRouter>
         <Switch>
-          {cookies.vlabToken ? (
+          {cookies.token && cookies.keyrock_token ? (
             <>
               <Layout>
                 <Switch>

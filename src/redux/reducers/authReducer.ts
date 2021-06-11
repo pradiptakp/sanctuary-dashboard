@@ -1,10 +1,10 @@
 import { createReducer } from "typesafe-actions";
-import { User } from "../../types";
+import { UserData } from "../../types";
 import { AuthAction } from "../actions/actionTypes";
 import { setUser } from "../actions/authActions";
 
 export interface AuthState {
-  user?: User | undefined;
+  user?: UserData | undefined;
 }
 
 const initialState: AuthState = {

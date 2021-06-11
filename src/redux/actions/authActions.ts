@@ -1,7 +1,7 @@
 import { createAction, createAsyncAction } from "typesafe-actions";
-import { User } from "../../types";
+import { UserData } from "../../types";
 
-export const setUser = createAction("SET_USER", (user?: User) => user)();
+export const setUser = createAction("SET_USER", (user?: UserData) => user)();
 
 export const postLogin = createAsyncAction(
   "POST_LOGIN_REQUEST",
@@ -13,7 +13,7 @@ export const postLogin = createAsyncAction(
       username: string;
       password: string;
     };
-    onSuccess: () => void;
+    onSuccess: (res: UserData) => void;
     onFailure: () => void;
   },
   any,
