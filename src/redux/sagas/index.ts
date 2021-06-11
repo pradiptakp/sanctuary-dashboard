@@ -1,7 +1,9 @@
 import { all } from "redux-saga/effects";
-import compiles from "./compiles";
-import modules from "./modules";
+import auth from "./auth";
+import device from "./device";
+import room from "./room";
+import user from "./user";
 
 export default function* root() {
-  yield all([compiles(), modules()]);
+  yield all([auth(), device(), room(), user()]);
 }

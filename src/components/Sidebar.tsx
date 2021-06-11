@@ -62,6 +62,7 @@ const routes: {
 ];
 
 export const Sidebar = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dark = useSelector((state: RootState) => state.app.dark);
   const { pathname } = useLocation();
   return (
