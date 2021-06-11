@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactComponent as LogoTextWhite } from "../assets/images/logo-text-white.svg";
 
 export const Footer = () => {
   return (
@@ -11,7 +10,6 @@ export const Footer = () => {
             alt="pens putih"
             className="w-10 h-10"
           />
-          <LogoTextWhite className="w-40 h-6" />
         </div>
         <div className="flex-1 flex flex-col text-lightBlue-50">
           <div className="font-black uppercase text-xs tracking-wider text-blueGray-200 dark:text-blue-400 mb-4">

@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { ReactComponent as LogoTextWhite } from "../assets/images/logo-text-white.svg";
-import { ReactComponent as LogoText } from "../assets/images/logo-text.svg";
 import { RootState } from "../redux/store";
 
 const routes: {
@@ -69,13 +67,7 @@ export const Sidebar = () => {
   return (
     <aside className="z-30 flex-shrink-0  w-64  bg-white dark:bg-blueGray-800 relative h-screen flex flex-col">
       <div className="flex px-6 items-center h-16">
-        <Link to="/vlab">
-          {dark ? (
-            <LogoTextWhite className="w-36 h-12" />
-          ) : (
-            <LogoText className="w-36 h-12" />
-          )}
-        </Link>
+        <Link to="/vlab">Sanctuary</Link>
       </div>
       <ul className="text-blueGray-800 dark:text-gray-400 flex-1 overflow-y-auto scrollbar-thin">
         {routes.map((v) => {

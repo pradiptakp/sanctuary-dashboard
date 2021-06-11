@@ -1,6 +1,5 @@
 import React from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { formatName } from "../utils/formatter";
 import { RootState } from "../redux/store";

@@ -4,6 +4,8 @@ import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/styles/tailwind.css";
@@ -27,19 +29,31 @@ const contextClass = {
 };
 
 export const App = () => {
+  const [cookies] = useCookies(["token"]);
+
+  if (cookies.token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${cookies.token}`;
+  }
   return (
     <ReduxProvider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route path="/vlab-admin" exact component={Login} />
+          {cookies.vlabToken ? (
+            <>
+              <Layout>
+                <Switch>
+                  <Route path="/home" exact component={Home} />
+                  <Redirect to="/home" />
+                </Switch>
+              </Layout>
+            </>
+          ) : (
+            <>
+              <Route path="/login" exact component={Login} />
 
-          <Layout>
-            <Switch>
-              <Route path="/vlab-admin/home" exact component={Home} />
-              <Redirect to="/vlab-admin/home" />
-            </Switch>
-          </Layout>
-          <Redirect to="/vlab-admin" />
+              <Redirect to="/login" />
+            </>
+          )}
         </Switch>
         <ToastContainer
           transition={Slide}
