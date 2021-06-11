@@ -1,9 +1,8 @@
 import React from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { formatName } from "../utils/formatter";
 import { RootState } from "../redux/store";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { toggleDarkMode } from "../redux/actions/appActions";
 import { PayloadAction } from "typesafe-actions";
 
@@ -14,6 +13,8 @@ export const Navbar = ({
   dark?: boolean;
   toggleDarkMode: (dark: boolean) => PayloadAction<"TOGGLE_DARK_MODE", boolean>;
 }) => {
+  const user = useSelector((state: RootState) => state.auth.user);
+
   return (
     <div>
       <header className="z-50 bg-white dark:bg-blueGray-800 h-16 py-4 ">
@@ -26,16 +27,16 @@ export const Navbar = ({
                 <>
                   <Popover.Button className="cursor-pointer flex space-x-4 items-center focus:outline-none ml-4">
                     <img
-                      src="https://ethol.pens.ac.id/api/images/user.png"
+                      src={`https://avatars.dicebear.com/api/jdenticon/${user?.userData.email}.svg`}
                       alt="avatar"
                       className="w-10 h-10 rounded-full"
                     />
                     <div className="text-left">
                       <div className="font-medium text-blueGray-800 dark:text-blueGray-100">
-                        {formatName("Sherly Maya Salsabilla")}
+                        {user?.userData.username}
                       </div>
                       <div className="text-blueGray-400 text-xs mt-0.5">
-                        2110171009
+                        {user?.userData.admin ? "Admin" : "User"}
                       </div>
                     </div>
                     <i
@@ -86,7 +87,7 @@ export const Navbar = ({
                 </>
               )}
             </Popover>
-            <button
+            {/* <button
               onClick={() => {
                 toggleDarkMode(!dark);
               }}
@@ -97,7 +98,7 @@ export const Navbar = ({
               ) : (
                 <i className="fas fa-moon text-lg text-lightBlue-800" />
               )}
-            </button>
+            </button> */}
           </div>
         </nav>
       </header>
