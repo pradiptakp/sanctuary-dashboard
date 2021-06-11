@@ -25,7 +25,7 @@ const Login = () => {
               <Button>Log in</Button>
             </div>
           </main>
-          <div className="h-32 md:h-auto md:w-1/2 bg-indigo-900 flex items-center justify-center">
+          <div className="h-32 md:h-auto md:w-1/2 bg-purple-900 flex items-center justify-center">
             <img
               src={
                 require("../assets/images/sanctuary-logo-white640.png").default

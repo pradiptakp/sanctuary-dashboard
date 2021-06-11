@@ -1,50 +1,54 @@
-export type Courses = {
-  name: string;
-  id: string;
-  description: string;
-  thumbnail_url: string;
-  modules: {
+export type UserData = {
+  access_token: string;
+  token_type: "Bearer";
+  scope: ["permanent"];
+  keyrockToken: string;
+  userData: {
+    scope: [];
     id: string;
-    title: string;
-    submodules: {
-      id: string;
-      user_progress: {
-        is_done: boolean;
-      }[];
-    }[];
-  }[];
-}[];
-
-export type Course = {
-  name: string;
-  id: string;
-  description: string;
-  thumbnail_url: string;
-  modules: {
-    id: string;
-    title: string;
-    submodules: {
-      id: string;
-      title: string;
-    }[];
-  }[];
+    username: string;
+    email: string;
+    date_password: string;
+    enabled: boolean;
+    admin: boolean;
+  };
 };
 
-export type Lesson = {
-  title: string;
-  contents: string;
-  module_id: string;
-  modules: {
-    submodules: {
-      title: string;
-      id: string;
-    }[];
-    title: string;
-    id: string;
-    prog_languages: {
-      id: string;
-      name: string;
-      thumbnail_url: string;
-    };
-  };
+export type Room = {
+  id: string;
+  type: "Room";
+  description: string;
+  name: string;
+  powerUsage: number;
+  refHouse: string;
+  temperature: number;
+  totalDevice: number;
+};
+
+export type Device = {
+  id: string;
+  type: string;
+  TimeInstant: string;
+  monthly_usage: string;
+  off_info: string;
+  off_status: string;
+  on_info: string;
+  on_status: string;
+  power: string;
+  refRoom: string;
+  state: string;
+  on: string;
+  off: string;
+};
+
+export type User = {
+  scope: any[];
+  id: string;
+  username: string;
+  email: string;
+  enabled: boolean;
+  gravatar: boolean;
+  date_password: string;
+  description: string;
+  website: string | null;
 };
