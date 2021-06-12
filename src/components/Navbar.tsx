@@ -5,6 +5,8 @@ import { RootState } from "../redux/store";
 import { connect, useSelector } from "react-redux";
 import { toggleDarkMode } from "../redux/actions/appActions";
 import { PayloadAction } from "typesafe-actions";
+import { useLocation } from "react-router-dom";
+import { toTitleCase } from "../utils/formatter";
 
 export const Navbar = ({
   dark,
@@ -14,6 +16,7 @@ export const Navbar = ({
   toggleDarkMode: (dark: boolean) => PayloadAction<"TOGGLE_DARK_MODE", boolean>;
 }) => {
   const user = useSelector((state: RootState) => state.auth.user);
+  const { pathname } = useLocation();
 
   return (
     <div>
@@ -85,6 +88,36 @@ export const Navbar = ({
           </div>
         </nav>
       </header>
+      <div className="px-6 pt-6">
+        <div className="mb-2 text-gray-400 font-medium">
+          Sanctuary
+          {pathname.split("/").map((v, i) => {
+            if (i === 0) return null;
+            return (
+              <span>
+                <span className="mx-2">\</span>
+                <span className="text-blue-500 font-bold">
+                  {v
+                    .split("-")
+                    .map(
+                      (_v, i) =>
+                        `${i !== 0 ? " " : ""}${_v
+                          .charAt(0)
+                          .toUpperCase()}${_v.substr(1)}`
+                    )}
+                </span>
+              </span>
+            );
+          })}
+        </div>
+        <div className="text-2xl font-bold tracking-wide">
+          {toTitleCase(
+            pathname
+              .split("/")
+              [pathname.split("/").length - 1].replaceAll("-", " ")
+          )}
+        </div>
+      </div>
       {/* <div className="border-t dark:border-blueGray-800 bg-white dark:bg-blueGray-900 py-3 px-6">
         <nav
           aria-label="breadcrumb"

@@ -8,12 +8,7 @@ const Home = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   return (
     <div className="p-6">
-      <div className="mb-1 text-gray-400 font-medium">
-        Sanctuary<span className="mx-2">\</span>
-        <span className="text-blue-500 font-bold">Dashboard</span>
-      </div>
-      <div className="text-2xl font-bold tracking-wide">Dashboard</div>
-      <div className="grid grid-cols-3 gap-6 mt-8">
+      <div className="grid grid-cols-3 gap-6">
         <Card className="bg-gradient-to-tr from-purple-200 to-blue-100 col-span-2 lg:h-52 flex items-center shadow-none">
           <div className="flex-1 flex flex-col justify-center">
             <div className="text-lg font-bold">
@@ -34,8 +29,7 @@ const Home = () => {
               Documentation
             </div>
             <div className="mt-1 text-blueGray-200">
-              Not sure where to start? Visit documentation for Sanctuary
-              Smarthome
+              Click here to visit documentation for Sanctuary Smarthome
             </div>
           </Card>
         </a>
