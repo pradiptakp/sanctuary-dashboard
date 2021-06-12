@@ -14,13 +14,11 @@ export const Layout: React.FC<{}> = ({ children }) => {
       } flex h-screen overflow-y-hidden bg-blueGray-100`}
     >
       <Sidebar />
-      <div className="flex-1 relative flex flex-col w-full">
+      <div className="flex-1 relative flex flex-col w-full overflow-y-scroll scrollbar-thin p-6">
         <div>
           <Navbar />
         </div>
-        <div className=" dark:bg-blueGray-900 h-full overflow-y-auto">
-          {children}
-        </div>
+        <div className=" dark:bg-blueGray-900 h-full">{children}</div>
       </div>
     </div>
   );

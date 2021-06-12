@@ -2071,6 +2071,13 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-table@^7.7.1":
+  version "7.7.1"
+  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.7.1.tgz#cac73133fc185e152e31435f8e6fce89ab868661"
+  integrity sha512-oed13swLIS4Ffyo4jAjl9lGbYMaY0uavKoI9GNMvf2R6vh8JfpRUpizQ90X1VI4WrhfaMb/HMsN7TTBvkGOQXQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^17.0.0":
   version "17.0.11"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.11.tgz#67fcd0ddbf5a0b083a0f94e926c7d63f3b836451"
@@ -9665,6 +9672,11 @@ react-spinners@^0.11.0:
   integrity sha512-rDZc0ABWn/M1OryboGsWVmIPg8uYWl0L35jPUhr40+Yg+syVPjeHwvnB7XWaRpaKus3M0cG9BiJA+ZB0dAwWyw==
   dependencies:
     "@emotion/react" "^11.1.4"
+
+react-table@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.7.0.tgz#e2ce14d7fe3a559f7444e9ecfe8231ea8373f912"
+  integrity sha512-jBlj70iBwOTvvImsU9t01LjFjy4sXEtclBovl3mTiqjz23Reu0DKnRza4zlLtOPACx6j2/7MrQIthIK1Wi+LIA==
 
 react-toastify@^7.0.4:
   version "7.0.4"

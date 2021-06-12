@@ -17,6 +17,7 @@ import { ToastContainer, Slide } from "react-toastify";
 import { Layout } from "./containers/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import IndexDevice from "./pages/Devices";
 // pages
 
 const contextClass = {
@@ -46,6 +47,7 @@ export const App = () => {
               <Layout>
                 <Switch>
                   <Route path="/home" exact component={Home} />
+                  <Route path="/devices" exact component={IndexDevice} />
                   <Redirect to="/home" />
                 </Switch>
               </Layout>

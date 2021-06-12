@@ -20,7 +20,7 @@ export const Navbar = ({
 
   return (
     <div>
-      <header className="z-50 bg-white dark:bg-blueGray-800 h-16 py-4 absolute right-6 top-4 rounded-lg shadow-lg ">
+      <header className="z-50 bg-white dark:bg-blueGray-800 h-16 py-4 fixed right-8 top-4 rounded-lg shadow-lg ">
         <nav className="container flex items-center justify-between h-full px-8 ">
           <div className="flex flex-1 space-x-10 ">
             <Popover className="relative">
@@ -88,7 +88,7 @@ export const Navbar = ({
           </div>
         </nav>
       </header>
-      <div className="px-6 pt-6">
+      <div className="mb-6">
         <div className="mb-2 text-gray-400 font-medium">
           Sanctuary
           {pathname.split("/").map((v, i) => {

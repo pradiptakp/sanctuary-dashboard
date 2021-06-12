@@ -38,7 +38,7 @@ export const Sidebar = () => {
   return (
     <aside className="z-30 flex-shrink-0  w-20  bg-white dark:bg-blueGray-800 relative h-screen flex flex-col  border-r">
       <div className="flex items-center justify-center h-16 border-b">
-        <Link to="/vlab">
+        <Link to="/">
           <img
             src={require("../assets/images/sanctuary-logosq640.png").default}
             className="w-8 h-8"
