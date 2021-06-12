@@ -17,15 +17,13 @@ export const Navbar = ({
 
   return (
     <div>
-      <header className="z-50 bg-white dark:bg-blueGray-800 h-16 py-4 ">
-        <nav className="container flex items-center justify-between h-full px-6 mx-auto">
-          <div className="flex flex-1 space-x-10 mx-10">
-            <div className="flex-1" />
-
+      <header className="z-50 bg-white dark:bg-blueGray-800 h-16 py-4 absolute right-6 top-4 rounded-lg shadow-lg ">
+        <nav className="container flex items-center justify-between h-full px-8 ">
+          <div className="flex flex-1 space-x-10 ">
             <Popover className="relative">
               {({ open }) => (
                 <>
-                  <Popover.Button className="cursor-pointer flex space-x-4 items-center focus:outline-none ml-4">
+                  <Popover.Button className="cursor-pointer flex space-x-4 items-center focus:outline-none ">
                     <img
                       src={`https://avatars.dicebear.com/api/jdenticon/${user?.userData.email}.svg`}
                       alt="avatar"
@@ -47,21 +45,6 @@ export const Navbar = ({
                   </Popover.Button>
 
                   <Transition
-                    enter="transition ease-out duration-200"
-                    enterFrom="opacity-0 translate-y-1 "
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 translate-y-1"
-                  >
-                    <Popover.Overlay
-                      className={`${
-                        open ? "fixed inset-0 top-16 " : "opacity-0"
-                      } bg-black opacity-50`}
-                    />
-                  </Transition>
-
-                  <Transition
                     as={Fragment}
                     enter="transition ease-out duration-200 transform"
                     enterFrom="opacity-0 translate-y-12"
@@ -70,14 +53,14 @@ export const Navbar = ({
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-12"
                   >
-                    <Popover.Panel className="absolute right-0 z-10 px-4 mt-2 sm:px-0 ">
+                    <Popover.Panel className="absolute right-0 z-10 px-4 mt-2 sm:px-0 w-32">
                       <>
                         <i className="absolute right-12 fas fa-caret-up text-4xl text-white dark:text-blueGray-900" />
                         <div
-                          className="overflow-hidden shadow-md rounded-lg mt-6 bg-white dark:bg-blueGray-900 flex flex-col dark:text-blueGray-100"
+                          className="overflow-hidden shadow-lg rounded-lg mt-6 bg-white dark:bg-blueGray-900 flex flex-col dark:text-blueGray-100 "
                           style={{ maxHeight: "500px" }}
                         >
-                          <div className="p-4 pr-16 relative cursor-pointer hover:bg-blue-100 dark:hover:bg-blueGray-800 hover:text-blue-800 dark:hover:text-blue-400 transition ease-in-out duration-200 ">
+                          <div className="p-4 relative cursor-pointer hover:bg-blue-100 dark:hover:bg-blueGray-800 hover:text-blue-800 dark:hover:text-blue-400 transition ease-in-out duration-200 ">
                             Log Out
                           </div>
                         </div>
