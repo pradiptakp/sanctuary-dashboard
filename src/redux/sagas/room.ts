@@ -2,6 +2,7 @@ import { takeLatest } from "redux-saga/effects";
 import axios, { AxiosResponse } from "axios";
 import {
   deleteRoom,
+  getRoom,
   getRooms,
   postRoom,
   updateRoom,
@@ -20,6 +21,18 @@ function* getRoomsSaga({ payload }: ReturnType<typeof getRooms.request>) {
   }
 }
 
+function* getRoomSaga({ payload }: ReturnType<typeof getRoom.request>) {
+  try {
+    const response: AxiosResponse<Room> = yield axios.get(
+      `${INDEX_ROOM}/${payload.id}`
+    );
+    payload.onSuccess(response.data);
+  } catch (err: any) {
+    console.error(err.response);
+    payload.onFailure(err.response.data);
+  }
+}
+
 function* postRoomSaga({ payload }: ReturnType<typeof postRoom.request>) {
   try {
     yield axios.post(STORE_ROOM, payload.data);
@@ -33,7 +46,7 @@ function* postRoomSaga({ payload }: ReturnType<typeof postRoom.request>) {
 
 function* updateRoomSaga({ payload }: ReturnType<typeof updateRoom.request>) {
   try {
-    yield axios.put(UPDATE_ROOM, payload.data);
+    yield axios.put(UPDATE_ROOM + payload.id, payload.data);
 
     payload.onSuccess();
   } catch (err: any) {
@@ -49,12 +62,13 @@ function* deleteRoomSaga({ payload }: ReturnType<typeof deleteRoom.request>) {
     payload.onSuccess();
   } catch (err: any) {
     console.error(err.response);
-    payload.onFailure();
+    payload.onFailure(err.response.data);
   }
 }
 
 export default function* auth() {
   yield takeLatest(getRooms.request, getRoomsSaga);
+  yield takeLatest(getRoom.request, getRoomSaga);
   yield takeLatest(postRoom.request, postRoomSaga);
   yield takeLatest(updateRoom.request, updateRoomSaga);
   yield takeLatest(deleteRoom.request, deleteRoomSaga);

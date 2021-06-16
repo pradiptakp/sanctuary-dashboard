@@ -14,7 +14,7 @@ export const postLogin = createAsyncAction(
       password: string;
     };
     onSuccess: (res: UserData) => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -22,5 +22,6 @@ export const postLogin = createAsyncAction(
 
 export const postLogout = createAction(
   "POST_LOGIN",
-  (payload: { onSuccess: () => void; onFailure: () => void }) => payload
+  (payload: { onSuccess: () => void; onFailure: (err?: any) => void }) =>
+    payload
 );

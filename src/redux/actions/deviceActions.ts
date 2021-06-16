@@ -8,7 +8,7 @@ export const getDevices = createAsyncAction(
 )<
   {
     onSuccess: (res: Device[]) => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -22,7 +22,7 @@ export const getDevice = createAsyncAction(
   {
     id: string;
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -36,7 +36,7 @@ export const deleteDevice = createAsyncAction(
   {
     id: string;
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -54,7 +54,7 @@ export const updateDevice = createAsyncAction(
       roomId?: string;
     };
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -71,7 +71,7 @@ export const postDevice = createAsyncAction(
       roomId: string;
     };
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -88,7 +88,7 @@ export const switchDevice = createAsyncAction(
       state: boolean;
     };
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any

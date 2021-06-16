@@ -1,11 +1,25 @@
 import React from "react";
 import { Card } from "../../components/Card";
 import { Button } from "../../components/Button";
-import Input from "../../components/Input";
+
+const DeviceTypes = [
+  {
+    value: "lamp",
+    name: "Lamp",
+  },
+  {
+    value: "lock",
+    name: "Door Lock",
+  },
+  {
+    value: "tempSensor",
+    name: "Temperature Sensor",
+  },
+];
 
 export const CreateDevice = () => {
   const [deviceType, setDeviceType] =
-    React.useState<"" | "Lamp" | "Lock" | "TempSensor">("");
+    React.useState<"" | "lamp" | "lock" | "tempSensor">("");
 
   return (
     <div>
@@ -19,12 +33,19 @@ export const CreateDevice = () => {
             <span>Device Type</span>
             <div className="relative inline-block w-full text-gray-700">
               <select
+                onChange={(e) =>
+                  setDeviceType(
+                    e.target.value as "lamp" | "lock" | "tempSensor"
+                  )
+                }
                 className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline"
                 placeholder="Regular input"
               >
-                <option>Lamp</option>
-                <option>Door Lock</option>
-                <option>Temperature Sensor</option>
+                {DeviceTypes.map((v) => (
+                  <option key={v.value} value={v.value}>
+                    {v.value}
+                  </option>
+                ))}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">

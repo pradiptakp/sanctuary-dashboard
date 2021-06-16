@@ -8,7 +8,7 @@ export const getUsers = createAsyncAction(
 )<
   {
     onSuccess: (res: User[]) => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -22,7 +22,7 @@ export const deleteUser = createAsyncAction(
   {
     id: string;
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -36,7 +36,7 @@ export const getUser = createAsyncAction(
   {
     id: string;
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -56,7 +56,7 @@ export const updateUser = createAsyncAction(
       isAdmin?: boolean;
     };
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -75,7 +75,7 @@ export const postUser = createAsyncAction(
       isAdmin: boolean;
     };
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any

@@ -8,7 +8,7 @@ export const getRooms = createAsyncAction(
 )<
   {
     onSuccess: (res: Room[]) => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -22,7 +22,7 @@ export const deleteRoom = createAsyncAction(
   {
     id: string;
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -35,8 +35,8 @@ export const getRoom = createAsyncAction(
 )<
   {
     id: string;
-    onSuccess: () => void;
-    onFailure: () => void;
+    onSuccess: (res: Room) => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -54,7 +54,7 @@ export const updateRoom = createAsyncAction(
       description?: string;
     };
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any
@@ -71,7 +71,7 @@ export const postRoom = createAsyncAction(
       description: string;
     };
     onSuccess: () => void;
-    onFailure: () => void;
+    onFailure: (err?: any) => void;
   },
   any,
   any

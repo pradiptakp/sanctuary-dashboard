@@ -23,6 +23,7 @@ export type Room = {
   refHouse: string;
   temperature: number;
   totalDevice: number;
+  devices: Device[];
 };
 
 export type Device = {

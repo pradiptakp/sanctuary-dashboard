@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 import { Card } from "../components/Card";
 import { RootState } from "../redux/store";
 import { ReactComponent as WelcomeSVG } from "../assets/images/welcome.svg";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   return (
-    <div className="grid grid-cols-3 gap-6">
+    <motion.div exit={{ opacity: 0 }} className="grid grid-cols-3 gap-6">
       <Card className="bg-gradient-to-tr from-purple-200 to-blue-100 col-span-2 lg:h-52 flex items-center shadow-none">
         <div className="flex-1 flex flex-col justify-center">
           <div className="text-lg font-bold">
@@ -64,7 +65,7 @@ const Home = () => {
           <i className={`fas fa-users text-xl text-lightBlue-600`} />
         </div>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 

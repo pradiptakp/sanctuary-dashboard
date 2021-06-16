@@ -50,11 +50,11 @@ export const App = () => {
             <>
               <Layout>
                 <Switch>
-                  <Route path="/home" exact component={Home} />
+                  <Route path="/dashboard" exact component={Home} />
                   <Route path="/devices" exact component={IndexDevice} />
                   <Route path="/users" exact component={IndexUser} />
                   <Route
-                    path="/devices/create-room"
+                    path="/devices/create-room/:id?"
                     exact
                     component={CreateRoom}
                   />
@@ -68,7 +68,7 @@ export const App = () => {
                     exact
                     component={CreateUser}
                   />
-                  <Redirect to="/home" />
+                  <Redirect to="/dashboard" />
                 </Switch>
               </Layout>
             </>

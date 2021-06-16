@@ -8,8 +8,8 @@ module.exports = {
       ...colors,
     },
     fontFamily: {
-      body: ["Rubik", "sans-serif"],
-      display: ["Rubik", "sans-serif"],
+      body: ["Inter", "sans-serif"],
+      display: ["Inter", "sans-serif"],
     },
     extend: {
       typography: (theme) => ({

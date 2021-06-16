@@ -10,7 +10,7 @@ const routes: {
   name: string;
 }[] = [
   {
-    path: "/home", // the url
+    path: "/dashboard", // the url
     icon: "home", // the component being exported from icons/index.js
     name: "Dashboard", // name that appear in Sidebar
   },
@@ -77,7 +77,7 @@ export const Sidebar = () => {
           );
         })}
       </div>
-      <ReactTooltip place="right" />
+      <ReactTooltip place="right" effect="solid" />
     </aside>
   );
 };
