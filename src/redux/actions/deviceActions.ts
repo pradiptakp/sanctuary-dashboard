@@ -1,5 +1,5 @@
 import { createAsyncAction } from "typesafe-actions";
-import { Device } from "../../types";
+import { Device, DeviceType } from "../../types";
 
 export const getDevices = createAsyncAction(
   "GET_DEVICES_REQUEST",
@@ -21,7 +21,7 @@ export const getDevice = createAsyncAction(
 )<
   {
     id: string;
-    onSuccess: () => void;
+    onSuccess: (res: Device) => void;
     onFailure: (err?: any) => void;
   },
   any,
@@ -50,8 +50,7 @@ export const updateDevice = createAsyncAction(
   {
     id: string;
     data: {
-      name?: string;
-      roomId?: string;
+      type: DeviceType;
     };
     onSuccess: () => void;
     onFailure: (err?: any) => void;
@@ -67,7 +66,7 @@ export const postDevice = createAsyncAction(
 )<
   {
     data: {
-      name: string;
+      type: DeviceType;
       roomId: string;
     };
     onSuccess: () => void;

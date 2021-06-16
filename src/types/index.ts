@@ -14,6 +14,8 @@ export type UserData = {
   };
 };
 
+export type DeviceType = "Lamp" | "Lock" | "Temperature";
+
 export type Room = {
   id: string;
   type: "Room";
@@ -28,7 +30,7 @@ export type Room = {
 
 export type Device = {
   id: string;
-  type: string;
+  type: DeviceType;
   TimeInstant: string;
   monthly_usage: string;
   off_info: string;

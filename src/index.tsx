@@ -54,12 +54,17 @@ export const App = () => {
                   <Route path="/devices" exact component={IndexDevice} />
                   <Route path="/users" exact component={IndexUser} />
                   <Route
-                    path="/devices/create-room/:id?"
+                    path="/devices/create-room"
                     exact
                     component={CreateRoom}
                   />
                   <Route
-                    path="/devices/create-device"
+                    path="/devices/edit-room/:id?"
+                    exact
+                    component={CreateRoom}
+                  />
+                  <Route
+                    path="/devices/create-device/:roomId"
                     exact
                     component={CreateDevice}
                   />

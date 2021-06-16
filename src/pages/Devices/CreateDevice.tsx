@@ -1,49 +1,124 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { Card } from "../../components/Card";
 import { Button } from "../../components/Button";
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  getDevice,
+  postDevice,
+  updateDevice,
+} from "../../redux/actions/deviceActions";
+import { DeviceType } from "../../types";
+import { toast } from "react-toastify";
 
-const DeviceTypes = [
+const DeviceTypes: { value: DeviceType; name: string }[] = [
   {
-    value: "lamp",
+    value: "Lamp",
     name: "Lamp",
   },
   {
-    value: "lock",
+    value: "Lock",
     name: "Door Lock",
   },
   {
-    value: "tempSensor",
+    value: "Temperature",
     name: "Temperature Sensor",
   },
 ];
 
 export const CreateDevice = () => {
-  const [deviceType, setDeviceType] =
-    React.useState<"" | "lamp" | "lock" | "tempSensor">("");
+  const { roomId, deviceId } =
+    useParams<{ roomId?: string; deviceId: string }>();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [deviceType, setDeviceType] = React.useState<DeviceType>("Lamp");
+
+  React.useEffect(() => {
+    if (deviceId) {
+      dispatch(
+        getDevice.request({
+          id: deviceId,
+          onSuccess: (res) => {
+            setDeviceType(res.type);
+          },
+          onFailure: (err) => {
+            toast.error(err);
+            history.replace("/devices");
+          },
+        })
+      );
+    }
+  }, []);
+
+  const onCreate = () => {
+    if (deviceType && roomId) {
+      dispatch(
+        postDevice.request({
+          data: {
+            type: deviceType,
+            roomId,
+          },
+          onFailure: (err) => {
+            toast.error(err);
+            history.replace("/devices");
+          },
+          onSuccess: () => {
+            toast.success("Device added!");
+            history.replace("/devices");
+          },
+        })
+      );
+    }
+  };
+
+  const onUpdate = () => {
+    if (deviceId && deviceType) {
+      dispatch(
+        updateDevice.request({
+          id: deviceId,
+          data: {
+            type: deviceType,
+          },
+          onSuccess: () => {
+            toast.success("Device updated!");
+            history.replace("/devices");
+          },
+          onFailure: () => {},
+        })
+      );
+    }
+  };
 
   return (
     <div>
       <Card>
-        <div className="lg:w-1/3">
+        <form
+          className="lg:w-1/3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (deviceId) {
+              onUpdate();
+            } else {
+              onCreate();
+            }
+          }}
+        >
           <div className="block text-gray-700 dark:text-gray-400">
-            <span>Room Name</span>
-            <div className="font-medium text-lg">Living Room</div>
+            <span>Room Id</span>
+            <div className="font-medium text-lg">{roomId}</div>
           </div>
           <div className="mt-4 block text-gray-700 dark:text-gray-400">
             <span>Device Type</span>
             <div className="relative inline-block w-full text-gray-700">
               <select
-                onChange={(e) =>
-                  setDeviceType(
-                    e.target.value as "lamp" | "lock" | "tempSensor"
-                  )
-                }
+                onChange={(e) => setDeviceType(e.target.value as DeviceType)}
                 className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline"
                 placeholder="Regular input"
               >
                 {DeviceTypes.map((v) => (
                   <option key={v.value} value={v.value}>
-                    {v.value}
+                    {v.name}
                   </option>
                 ))}
               </select>
@@ -60,12 +135,17 @@ export const CreateDevice = () => {
           </div>
 
           <div className="flex gap-4">
-            <Button className="flex-1 mt-6 bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900">
+            <Button
+              type="button"
+              className="flex-1 mt-6 bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900"
+            >
               Cancel
             </Button>
-            <Button className="mt-6 flex-1">Create</Button>
+            <Button type="submit" className="mt-6 flex-1">
+              Create
+            </Button>
           </div>
-        </div>
+        </form>
       </Card>
     </div>
   );

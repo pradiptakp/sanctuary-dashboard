@@ -60,7 +60,7 @@ export const CreateRoom = () => {
             description: roomDescription,
           },
           onSuccess: () => {
-            toast.success("Room added!");
+            toast.success("Room updated!");
             history.replace("/devices");
           },
           onFailure: () => {},
@@ -107,11 +107,7 @@ export const CreateRoom = () => {
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              className="mt-6 flex-1"
-              disabled={!roomName || !roomDescription}
-            >
+            <Button type="submit" className="mt-6 flex-1" disabled={!roomName}>
               {params.id ? "Update" : "Create"}
             </Button>
           </div>

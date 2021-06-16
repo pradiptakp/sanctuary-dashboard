@@ -11,9 +11,45 @@ import { Device, Room } from "../../types";
 import swal from "sweetalert2";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
+import { deleteDevice } from "../../redux/actions/deviceActions";
 
-export const DeviceCard = ({ data }: { data: Device }) => {
+export const DeviceCard = ({
+  data,
+  fetchRooms,
+}: {
+  data: Device;
+  fetchRooms: () => void;
+}) => {
+  const dispatch = useDispatch();
   const [deviceState, setDeviceState] = React.useState(false);
+
+  const onDelete = () => {
+    swal
+      .fire({
+        title: "Delete Device?",
+        text: "Device will be deleted, are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: `Delete`,
+      })
+      .then(({ isConfirmed }) => {
+        if (isConfirmed) {
+          dispatch(
+            deleteDevice.request({
+              id: data.id,
+              onSuccess: () => {
+                toast.success("Device deleted!");
+                fetchRooms();
+              },
+              onFailure: (err) => {
+                toast.error(err);
+              },
+            })
+          );
+        }
+      });
+  };
+
   return (
     <Card className="flex gap-6 bg-blue-100 shadow-none">
       <div
@@ -39,8 +75,13 @@ export const DeviceCard = ({ data }: { data: Device }) => {
 
       <div className="flex-1" />
       <div>
-        <Button className="self-center text-xs mr-2">Edit</Button>
-        <Button className="self-center text-xs bg-red-600 hover:bg-red-700">
+        {/* <Button className="self-center text-xs mr-2">Edit</Button> */}
+        <Button
+          onClick={() => {
+            onDelete();
+          }}
+          className="self-center text-xs bg-red-600 hover:bg-red-700"
+        >
           Delete
         </Button>
       </div>
@@ -76,8 +117,8 @@ export const Devices = () => {
   const onDelete = (id: string) => {
     swal
       .fire({
-        title: "Delete Device?",
-        text: "Device and its devices will be deleted, are you sure?",
+        title: "Delete Room?",
+        text: "Room and its devices will be deleted, are you sure?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: `Delete`,
@@ -142,7 +183,7 @@ export const Devices = () => {
 
                         {/* <Button className="self-center text-xs">Set as Main</Button> */}
                         <div className="flex items-center">
-                          <Link to={`/devices/create-room/${v.id}`}>
+                          <Link to={`/devices/edit-room/${v.id}`}>
                             <Button className="self-center text-xs mr-2">
                               Edit
                             </Button>
@@ -188,12 +229,15 @@ export const Devices = () => {
                             {v.devices.map((_v, _i) => {
                               return (
                                 <>
-                                  <DeviceCard data={_v} />
+                                  <DeviceCard
+                                    data={_v}
+                                    fetchRooms={fetchRooms}
+                                  />
                                 </>
                               );
                             })}
                             <Link
-                              to="/devices/create-device"
+                              to={`/devices/create-device/${v.id}`}
                               className="bg-blueGray-200 flex justify-center items-center rounded-lg p-4 "
                             >
                               <i className="fas fa-plus text-xl text-blue-600 mr-4" />

@@ -20,8 +20,4 @@ export const postLogin = createAsyncAction(
   any
 >();
 
-export const postLogout = createAction(
-  "POST_LOGIN",
-  (payload: { onSuccess: () => void; onFailure: (err?: any) => void }) =>
-    payload
-);
+export const postLogout = createAction("POST_LOGOUT", () => null)();

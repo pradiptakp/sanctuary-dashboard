@@ -2,11 +2,13 @@ import React from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { RootState } from "../redux/store";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "../redux/actions/appActions";
 import { PayloadAction } from "typesafe-actions";
 import { useLocation } from "react-router-dom";
 import { toTitleCase } from "../utils/formatter";
+import { postLogout } from "../redux/actions/authActions";
+import { useCookies } from "react-cookie";
 
 export const Navbar = ({
   dark,
@@ -15,8 +17,22 @@ export const Navbar = ({
   dark?: boolean;
   toggleDarkMode: (dark: boolean) => PayloadAction<"TOGGLE_DARK_MODE", boolean>;
 }) => {
+  const [, , removeCookie] = useCookies(["keyrock_token", "token"]);
   const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
+
+  const onLogout = () => {
+    removeCookie("keyrock_token", {
+      domain: "localhost",
+      path: "/",
+    });
+    removeCookie("token", {
+      domain: "localhost",
+      path: "/",
+    });
+    dispatch(postLogout());
+  };
 
   return (
     <div>
@@ -63,7 +79,12 @@ export const Navbar = ({
                           className="overflow-hidden shadow-lg rounded-lg mt-6 bg-white dark:bg-blueGray-900 flex flex-col dark:text-blueGray-100 "
                           style={{ maxHeight: "500px" }}
                         >
-                          <div className="p-4 relative cursor-pointer hover:bg-blue-100 dark:hover:bg-blueGray-800 hover:text-blue-800 dark:hover:text-blue-400 transition ease-in-out duration-200 ">
+                          <div
+                            onClick={() => {
+                              onLogout();
+                            }}
+                            className="p-4 relative cursor-pointer hover:bg-blue-100 dark:hover:bg-blueGray-800 hover:text-blue-800 dark:hover:text-blue-400 transition ease-in-out duration-200 "
+                          >
                             Log Out
                           </div>
                         </div>
@@ -92,12 +113,16 @@ export const Navbar = ({
         <div className="mb-2 text-gray-400 font-medium">
           Sanctuary
           {pathname.split("/").map((v, i) => {
-            if (i === 0) return null;
+            if (i === 0 || v.includes("urn:ngsi")) return null;
             return (
               <span>
                 <span className="mx-2">\</span>
                 <span
                   className={`${
+                    (pathname
+                      .split("/")
+                      [pathname.split("/").length - 1].includes("urn:ngsi") &&
+                      i === pathname.split("/").length - 2) ||
                     i === pathname.split("/").length - 1
                       ? "text-blue-500 font-bold"
                       : ""
@@ -120,7 +145,13 @@ export const Navbar = ({
           {toTitleCase(
             pathname
               .split("/")
-              [pathname.split("/").length - 1].replaceAll("-", " ")
+              [pathname.split("/").length - 1].includes("urn:ngsi")
+              ? pathname
+                  .split("/")
+                  [pathname.split("/").length - 2].replaceAll("-", " ")
+              : pathname
+                  .split("/")
+                  [pathname.split("/").length - 1].replaceAll("-", " ")
           )}
         </div>
       </div>
