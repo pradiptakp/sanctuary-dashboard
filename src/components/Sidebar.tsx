@@ -20,11 +20,6 @@ const routes: {
     name: "Devices",
   },
   {
-    path: "/rooms",
-    icon: "door-closed",
-    name: "Rooms",
-  },
-  {
     path: "/users",
     icon: "users",
     name: "Users",

@@ -96,7 +96,13 @@ export const Navbar = ({
             return (
               <span>
                 <span className="mx-2">\</span>
-                <span className="text-blue-500 font-bold">
+                <span
+                  className={`${
+                    i === pathname.split("/").length - 1
+                      ? "text-blue-500 font-bold"
+                      : ""
+                  }`}
+                >
                   {v
                     .split("-")
                     .map(

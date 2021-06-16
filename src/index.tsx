@@ -18,6 +18,10 @@ import { Layout } from "./containers/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import IndexDevice from "./pages/Devices";
+import IndexUser from "./pages/Users";
+import CreateRoom from "./pages/Devices/CreateRoom";
+import CreateDevice from "./pages/Devices/CreateDevice";
+import CreateUser from "./pages/Users/CreateUser";
 // pages
 
 const contextClass = {
@@ -48,6 +52,22 @@ export const App = () => {
                 <Switch>
                   <Route path="/home" exact component={Home} />
                   <Route path="/devices" exact component={IndexDevice} />
+                  <Route path="/users" exact component={IndexUser} />
+                  <Route
+                    path="/devices/create-room"
+                    exact
+                    component={CreateRoom}
+                  />
+                  <Route
+                    path="/devices/create-device"
+                    exact
+                    component={CreateDevice}
+                  />
+                  <Route
+                    path="/users/create-user"
+                    exact
+                    component={CreateUser}
+                  />
                   <Redirect to="/home" />
                 </Switch>
               </Layout>

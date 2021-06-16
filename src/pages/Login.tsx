@@ -74,7 +74,10 @@ const Login = () => {
                 />
               </div>
 
-              <Button disabled={loading || !username || !password}>
+              <Button
+                className="mt-6"
+                disabled={loading || !username || !password}
+              >
                 Log in
               </Button>
             </form>
