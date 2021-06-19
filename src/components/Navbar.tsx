@@ -113,7 +113,7 @@ export const Navbar = ({
         <div className="mb-2 text-gray-400 font-medium">
           Sanctuary
           {pathname.split("/").map((v, i) => {
-            if (i === 0 || v.includes("urn:ngsi")) return null;
+            if (i === 0) return null;
             return (
               <span>
                 <span className="mx-2">\</span>
@@ -121,7 +121,7 @@ export const Navbar = ({
                   className={`${
                     (pathname
                       .split("/")
-                      [pathname.split("/").length - 1].includes("urn:ngsi") &&
+                      [pathname.split("/").length - 2].includes("edit") &&
                       i === pathname.split("/").length - 2) ||
                     i === pathname.split("/").length - 1
                       ? "text-blue-500 font-bold"
@@ -143,9 +143,7 @@ export const Navbar = ({
         </div>
         <div className="text-2xl font-bold tracking-wide">
           {toTitleCase(
-            pathname
-              .split("/")
-              [pathname.split("/").length - 1].includes("urn:ngsi")
+            pathname.split("/")[pathname.split("/").length - 2].includes("edit")
               ? pathname
                   .split("/")
                   [pathname.split("/").length - 2].replaceAll("-", " ")

@@ -4,6 +4,7 @@ export const SOCKET_URL = `${HOST_URL}`;
 
 export const LOGIN_URL = `${API_URL}/auth/login`;
 
+export const GET_DASHBOARD_INFO = `${API_URL}/dashboard-info`;
 //Rooms
 export const INDEX_ROOM = `${API_URL}/room`;
 export const STORE_ROOM = `${API_URL}/room`;

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
-import { Provider as ReduxProvider } from "react-redux";
-import { store } from "./redux/store";
+import { Provider as ReduxProvider, useSelector } from "react-redux";
+import { RootState, store } from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -33,9 +33,10 @@ const contextClass = {
   dark: "bg-white-600 font-gray-300",
 };
 
-export const App = () => {
+const Navigations = () => {
   const [cookies] = useCookies(["token", "keyrock_token"]);
 
+  const { user } = useSelector((state: RootState) => state.auth);
   if (cookies.token && cookies.keyrock_token) {
     axios.defaults.headers.common["X-Auth-Token"] = `${cookies.token}`;
     axios.defaults.headers.common[
@@ -43,48 +44,60 @@ export const App = () => {
     ] = `${cookies.keyrock_token}`;
   }
   return (
-    <ReduxProvider store={store}>
-      <BrowserRouter>
-        <Switch>
-          {cookies.token && cookies.keyrock_token ? (
-            <>
-              <Layout>
-                <Switch>
-                  <Route path="/dashboard" exact component={Home} />
-                  <Route path="/devices" exact component={IndexDevice} />
+    <Switch>
+      {cookies.token && cookies.keyrock_token ? (
+        <>
+          <Layout>
+            <Switch>
+              <Route path="/dashboard" exact component={Home} />
+              <Route path="/devices" exact component={IndexDevice} />
+              <Route path="/devices/create-room" exact component={CreateRoom} />
+              <Route
+                path="/devices/edit-room/:id"
+                exact
+                component={CreateRoom}
+              />
+              <Route
+                path="/devices/create-device/:roomId"
+                exact
+                component={CreateDevice}
+              />
+              {user && user.userData.admin ? (
+                <>
                   <Route path="/users" exact component={IndexUser} />
-                  <Route
-                    path="/devices/create-room"
-                    exact
-                    component={CreateRoom}
-                  />
-                  <Route
-                    path="/devices/edit-room/:id?"
-                    exact
-                    component={CreateRoom}
-                  />
-                  <Route
-                    path="/devices/create-device/:roomId"
-                    exact
-                    component={CreateDevice}
-                  />
                   <Route
                     path="/users/create-user"
                     exact
                     component={CreateUser}
                   />
-                  <Redirect to="/dashboard" />
-                </Switch>
-              </Layout>
-            </>
-          ) : (
-            <>
-              <Route path="/login" exact component={Login} />
+                  <Route
+                    path="/users/edit-user/:id"
+                    exact
+                    component={CreateUser}
+                  />
+                </>
+              ) : null}
+            </Switch>
+          </Layout>
 
-              <Redirect to="/login" />
-            </>
-          )}
-        </Switch>
+          <Redirect to="/dashboard" />
+        </>
+      ) : (
+        <>
+          <Route path="/login" exact component={Login} />
+
+          <Redirect to="/login" />
+        </>
+      )}
+    </Switch>
+  );
+};
+
+export const App = () => {
+  return (
+    <ReduxProvider store={store}>
+      <BrowserRouter>
+        <Navigations />
         <ToastContainer
           transition={Slide}
           autoClose={2000}

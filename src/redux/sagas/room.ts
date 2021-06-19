@@ -66,7 +66,7 @@ function* deleteRoomSaga({ payload }: ReturnType<typeof deleteRoom.request>) {
   }
 }
 
-export default function* auth() {
+export default function* room() {
   yield takeLatest(getRooms.request, getRoomsSaga);
   yield takeLatest(getRoom.request, getRoomSaga);
   yield takeLatest(postRoom.request, postRoomSaga);

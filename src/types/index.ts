@@ -55,3 +55,9 @@ export type User = {
   description: string;
   website: string | null;
 };
+
+export type DashboardData = {
+  roomsTotal: number;
+  devicesTotal: number;
+  usersTotal: number;
+}

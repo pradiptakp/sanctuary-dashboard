@@ -1,4 +1,5 @@
-import { createAction } from "typesafe-actions";
+import { createAction, createAsyncAction } from "typesafe-actions";
+import { DashboardData } from "../../types";
 import { AppReducerState } from "../reducers/appReducer";
 
 /**
@@ -16,3 +17,16 @@ export const toggleDarkMode = createAction(
   "TOGGLE_DARK_MODE",
   (dark: boolean) => dark
 )();
+
+export const getDashboardInfo = createAsyncAction(
+  "GET_DASHBOARD",
+  "GET_DASHBOARD_SUCCESS",
+  "GET_DASHBOARD_ERROR"
+)<
+  {
+    onSuccess: (res: DashboardData) => void;
+    onFailure: (err?: any) => void;
+  },
+  any,
+  any
+>();

@@ -76,7 +76,7 @@ function* switchDeviceSaga({
     payload.onFailure();
   }
 }
-export default function* auth() {
+export default function* device() {
   yield takeLatest(getDevices.request, getDevicesSaga);
   yield takeLatest(postDevice.request, postDeviceSaga);
   yield takeLatest(updateDevice.request, updateDeviceSaga);

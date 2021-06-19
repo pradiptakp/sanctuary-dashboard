@@ -2,6 +2,7 @@ import { takeLatest } from "redux-saga/effects";
 import axios, { AxiosResponse } from "axios";
 import {
   deleteUser,
+  getUser,
   getUsers,
   postUser,
   updateUser,
@@ -16,7 +17,20 @@ function* getUsersSaga({ payload }: ReturnType<typeof getUsers.request>) {
     payload.onSuccess(response.data);
   } catch (err: any) {
     console.error(err.response);
-    payload.onFailure();
+    payload.onFailure(err.response?.data);
+  }
+}
+
+function* getUserSaga({ payload }: ReturnType<typeof getUser.request>) {
+  try {
+    const response: AxiosResponse<User> = yield axios.get(
+      `${INDEX_USER}/${payload.id}`
+    );
+
+    payload.onSuccess(response.data);
+  } catch (err: any) {
+    console.error(err.response);
+    payload.onFailure(err.response?.data);
   }
 }
 
@@ -27,18 +41,18 @@ function* postUserSaga({ payload }: ReturnType<typeof postUser.request>) {
     payload.onSuccess();
   } catch (err: any) {
     console.error(err.response);
-    payload.onFailure();
+    payload.onFailure(err.response?.data);
   }
 }
 
 function* updateUserSaga({ payload }: ReturnType<typeof updateUser.request>) {
   try {
-    yield axios.put(UPDATE_USER, payload.data);
+    yield axios.put(UPDATE_USER + payload.id, payload.data);
 
     payload.onSuccess();
   } catch (err: any) {
     console.error(err.response);
-    payload.onFailure();
+    payload.onFailure(err.response?.data);
   }
 }
 
@@ -49,12 +63,13 @@ function* deleteUserSaga({ payload }: ReturnType<typeof deleteUser.request>) {
     payload.onSuccess();
   } catch (err: any) {
     console.error(err.response);
-    payload.onFailure();
+    payload.onFailure(err.response?.data);
   }
 }
 
-export default function* auth() {
+export default function* user() {
   yield takeLatest(getUsers.request, getUsersSaga);
+  yield takeLatest(getUser.request, getUserSaga);
   yield takeLatest(postUser.request, postUserSaga);
   yield takeLatest(updateUser.request, updateUserSaga);
   yield takeLatest(deleteUser.request, deleteUserSaga);

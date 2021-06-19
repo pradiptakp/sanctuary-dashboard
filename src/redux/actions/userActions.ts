@@ -35,7 +35,7 @@ export const getUser = createAsyncAction(
 )<
   {
     id: string;
-    onSuccess: () => void;
+    onSuccess: (res: User) => void;
     onFailure: (err?: any) => void;
   },
   any,
@@ -51,7 +51,6 @@ export const updateUser = createAsyncAction(
     id: string;
     data: {
       username?: string;
-      email?: string;
       password?: string;
       isAdmin?: boolean;
     };
@@ -72,7 +71,6 @@ export const postUser = createAsyncAction(
       username: string;
       email: string;
       password: string;
-      isAdmin: boolean;
     };
     onSuccess: () => void;
     onFailure: (err?: any) => void;

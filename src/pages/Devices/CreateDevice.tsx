@@ -2,7 +2,7 @@
 import React from "react";
 import { Card } from "../../components/Card";
 import { Button } from "../../components/Button";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   getDevice,
@@ -134,14 +134,16 @@ export const CreateDevice = () => {
             </div>
           </div>
 
-          <div className="flex gap-4">
-            <Button
-              type="button"
-              className="flex-1 mt-6 bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900"
-            >
-              Cancel
-            </Button>
-            <Button type="submit" className="mt-6 flex-1">
+          <div className="flex gap-4 mt-6">
+            <Link to="/rooms" className="flex-1 ">
+              <Button
+                type="button"
+                className="flex-1  bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900"
+              >
+                Cancel
+              </Button>
+            </Link>
+            <Button type="submit" className="flex-1">
               Create
             </Button>
           </div>

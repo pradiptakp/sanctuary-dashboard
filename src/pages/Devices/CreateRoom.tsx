@@ -5,7 +5,7 @@ import { Button } from "../../components/Button";
 import Input from "../../components/Input";
 import { useDispatch } from "react-redux";
 import { getRoom, postRoom, updateRoom } from "../../redux/actions/roomActions";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const CreateRoom = () => {
@@ -42,7 +42,7 @@ export const CreateRoom = () => {
           description: roomDescription,
         },
         onSuccess: () => {
-          toast.success("Room added!");
+          toast.success("Room created!");
           history.replace("/devices");
         },
         onFailure: () => {},
@@ -99,15 +99,16 @@ export const CreateRoom = () => {
               onChange={(e) => setRoomDescription(e.target.value)}
             />
           </div>
-          <div className="flex gap-4">
-            <Button
-              type="button"
-              onClick={() => history.goBack()}
-              className="flex-1 mt-6 bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900"
-            >
-              Cancel
-            </Button>
-            <Button type="submit" className="mt-6 flex-1" disabled={!roomName}>
+          <div className="flex gap-4 mt-6">
+            <Link to="/rooms" className="flex-1 ">
+              <Button
+                type="button"
+                className="flex-1  bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900"
+              >
+                Cancel
+              </Button>
+            </Link>
+            <Button type="submit" className="flex-1" disabled={!roomName}>
               {params.id ? "Update" : "Create"}
             </Button>
           </div>
