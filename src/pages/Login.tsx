@@ -6,8 +6,10 @@ import { postLogin } from "../redux/actions/authActions";
 import nProgress from "nprogress";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const history = useHistory();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -29,6 +31,7 @@ const Login = () => {
           setLoading(false);
           setCookie("token", res.access_token);
           setCookie("keyrock_token", res.keyrockToken);
+          history.replace("/dashboard");
         },
         onFailure: () => {
           setLoading(false);

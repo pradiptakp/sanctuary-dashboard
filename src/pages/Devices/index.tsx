@@ -12,6 +12,7 @@ import swal from "sweetalert2";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 import { deleteDevice, switchDevice } from "../../redux/actions/deviceActions";
+import { ws } from "../../websocket";
 
 export const DeviceCard = ({
   data,
@@ -22,6 +23,14 @@ export const DeviceCard = ({
 }) => {
   const dispatch = useDispatch();
   const [deviceState, setDeviceState] = React.useState(data.state === "on");
+
+  React.useEffect(() => {
+    ws.on("switch", (s: { id: string; state: boolean }) => {
+      if (s.id === data.id) {
+        setDeviceState(s.state);
+      }
+    });
+  }, [data.id]);
 
   const onDelete = () => {
     swal

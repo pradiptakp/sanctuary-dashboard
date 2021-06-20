@@ -22,6 +22,7 @@ import IndexUser from "./pages/Users";
 import CreateRoom from "./pages/Devices/CreateRoom";
 import CreateDevice from "./pages/Devices/CreateDevice";
 import CreateUser from "./pages/Users/CreateUser";
+import { ws } from "./websocket";
 // pages
 
 const contextClass = {
@@ -77,10 +78,9 @@ const Navigations = () => {
                   />
                 </>
               ) : null}
+              <Redirect to="/dashboard" />
             </Switch>
           </Layout>
-
-          <Redirect to="/dashboard" />
         </>
       ) : (
         <>
@@ -94,6 +94,12 @@ const Navigations = () => {
 };
 
 export const App = () => {
+  React.useEffect(() => {
+    ws.on("connect", function () {
+      console.log("check 2", ws.connected);
+    });
+  }, []);
+
   return (
     <ReduxProvider store={store}>
       <BrowserRouter>
