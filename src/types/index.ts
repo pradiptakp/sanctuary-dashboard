@@ -42,6 +42,7 @@ export type Device = {
   state: string;
   on: string;
   off: string;
+  temperature: string;
 };
 
 export type User = {
@@ -60,4 +61,4 @@ export type DashboardData = {
   roomsTotal: number;
   devicesTotal: number;
   usersTotal: number;
-}
+};

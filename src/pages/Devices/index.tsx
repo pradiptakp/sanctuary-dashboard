@@ -23,6 +23,7 @@ export const DeviceCard = ({
 }) => {
   const dispatch = useDispatch();
   const [deviceState, setDeviceState] = React.useState(data.state === "on");
+  const [temperature, setTemperature] = React.useState(data.temperature);
 
   React.useEffect(() => {
     ws.on("switch", (s: { id: string; state: boolean }) => {
@@ -30,7 +31,13 @@ export const DeviceCard = ({
         setDeviceState(s.state);
       }
     });
-  }, [data.id]);
+
+    ws.on("update_temperature", (s: { id: string; temperature: string }) => {
+      if (s.id === data.id) {
+        setTemperature(s.temperature);
+      }
+    });
+  }, []);
 
   const onDelete = () => {
     swal
@@ -84,17 +91,26 @@ export const DeviceCard = ({
       <div>
         <div className=" flex flex-col items-start">
           <span className="text-blueGray-500 text-xs mb-1">Device</span>
-          <span className="text-lg font-bold">{data.id}</span>
+          <span className="text-lg font-bold">
+            {data.id.replace("urn:ngsi-ld:", "")}
+          </span>
         </div>
-        <label className=" flex flex-col items-start mt-2">
-          <span className="text-blueGray-500 text-xs mb-1">State</span>
-          <Switch
-            onColor="#3B82F6"
-            offColor="#A1A1AA"
-            onChange={() => onSwitch(!deviceState)}
-            checked={deviceState}
-          />
-        </label>
+        {data.id.includes("Lamp" || "Lock") ? (
+          <label className=" flex flex-col items-start mt-2">
+            <span className="text-blueGray-500 text-xs mb-1">State</span>
+            <Switch
+              onColor="#3B82F6"
+              offColor="#A1A1AA"
+              onChange={() => onSwitch(!deviceState)}
+              checked={deviceState}
+            />
+          </label>
+        ) : (
+          <label className=" flex flex-col items-start mt-2">
+            <span className="text-blueGray-500 text-xs mb-1">Temperature</span>
+            <span className="text-lg font-bold">{temperature}° C</span>
+          </label>
+        )}
       </div>
 
       <div className="flex-1" />
