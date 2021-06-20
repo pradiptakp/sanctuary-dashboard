@@ -20,6 +20,6 @@ export const DELETE_USER = `${API_URL}/user/`;
 //Devices
 export const INDEX_DEVICE = `${API_URL}/device`;
 export const STORE_DEVICE = `${API_URL}/device`;
-export const SWITCH_DEVICE = `${API_URL}/device/switch`;
+export const SWITCH_DEVICE = `${API_URL}/device/switch/`;
 export const UPDATE_DEVICE = `${API_URL}/device/`;
 export const DELETE_DEVICE = `${API_URL}/device/`;

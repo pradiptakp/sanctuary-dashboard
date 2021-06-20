@@ -11,7 +11,7 @@ import { Device, Room } from "../../types";
 import swal from "sweetalert2";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
-import { deleteDevice } from "../../redux/actions/deviceActions";
+import { deleteDevice, switchDevice } from "../../redux/actions/deviceActions";
 
 export const DeviceCard = ({
   data,
@@ -21,7 +21,7 @@ export const DeviceCard = ({
   fetchRooms: () => void;
 }) => {
   const dispatch = useDispatch();
-  const [deviceState, setDeviceState] = React.useState(false);
+  const [deviceState, setDeviceState] = React.useState(data.state === "on");
 
   const onDelete = () => {
     swal
@@ -50,6 +50,21 @@ export const DeviceCard = ({
       });
   };
 
+  const onSwitch = (state: boolean) => {
+    dispatch(
+      switchDevice.request({
+        id: data.id,
+        data: {
+          state,
+        },
+        onFailure: () => {},
+        onSuccess: () => {
+          setDeviceState(state);
+        },
+      })
+    );
+  };
+
   return (
     <Card className="flex gap-6 bg-blue-100 shadow-none">
       <div
@@ -67,7 +82,7 @@ export const DeviceCard = ({
           <Switch
             onColor="#3B82F6"
             offColor="#A1A1AA"
-            onChange={() => setDeviceState(!deviceState)}
+            onChange={() => onSwitch(!deviceState)}
             checked={deviceState}
           />
         </label>

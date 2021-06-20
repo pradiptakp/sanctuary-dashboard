@@ -68,7 +68,7 @@ function* switchDeviceSaga({
   payload,
 }: ReturnType<typeof switchDevice.request>) {
   try {
-    yield axios.post(SWITCH_DEVICE, payload.data);
+    yield axios.post(SWITCH_DEVICE + payload.id, payload.data);
 
     payload.onSuccess();
   } catch (err: any) {

@@ -103,7 +103,7 @@ export const CreateRoom = () => {
             <Link to="/rooms" className="flex-1 ">
               <Button
                 type="button"
-                className="flex-1  bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900"
+                className="flex-1 w-full bg-blueGray-200 hover:bg-blueGray-300 text-blueGray-900"
               >
                 Cancel
               </Button>
