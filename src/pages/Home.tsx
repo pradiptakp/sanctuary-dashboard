@@ -64,7 +64,9 @@ const Home = () => {
           <Card className="flex items-center">
             <div className="flex-1">
               <div className="font-bold">Total Devices</div>
-              <div className="text-xl mt-2 font-bold">{data?.devicesTotal}</div>
+              <div className="text-xl mt-2 font-bold">
+                {data?.devicesTotal || 0}
+              </div>
             </div>
             <div
               className={`w-12 h-12 flex items-center justify-center rounded bg-lightBlue-100`}
@@ -75,7 +77,9 @@ const Home = () => {
           <Card className="flex items-center">
             <div className="flex-1">
               <div className="font-bold">Total Rooms</div>
-              <div className="text-xl mt-2 font-bold">{data?.roomsTotal}</div>
+              <div className="text-xl mt-2 font-bold">
+                {data?.roomsTotal || 0}
+              </div>
             </div>
             <div
               className={`w-12 h-12 flex items-center justify-center rounded bg-lightBlue-100`}
@@ -86,7 +90,9 @@ const Home = () => {
           <Card className="flex items-center">
             <div className="flex-1">
               <div className="font-bold">Total Users</div>
-              <div className="text-xl mt-2 font-bold">{data?.usersTotal}</div>
+              <div className="text-xl mt-2 font-bold">
+                {data?.usersTotal || 0}
+              </div>
             </div>
             <div
               className={`w-12 h-12 flex items-center justify-center rounded bg-lightBlue-100`}

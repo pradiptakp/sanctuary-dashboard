@@ -33,6 +33,7 @@ export const DeviceCard = ({
     });
 
     ws.on("update_temperature", (s: { id: string; temperature: string }) => {
+      console.log("yia");
       if (s.id === data.id) {
         setTemperature(s.temperature);
       }
@@ -95,7 +96,7 @@ export const DeviceCard = ({
             {data.id.replace("urn:ngsi-ld:", "")}
           </span>
         </div>
-        {data.id.includes("Lamp" || "Lock") ? (
+        {data.id.includes("Lamp") || data.id.includes("Lock") ? (
           <label className=" flex flex-col items-start mt-2">
             <span className="text-blueGray-500 text-xs mb-1">State</span>
             <Switch
