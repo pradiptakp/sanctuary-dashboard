@@ -159,7 +159,7 @@ export const Devices = () => {
     swal
       .fire({
         title: "Delete Room?",
-        text: "Room and its devices will be deleted, are you sure?",
+        text: "Room will be deleted, are you sure?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: `Delete`,
