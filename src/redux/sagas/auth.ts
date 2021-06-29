@@ -10,7 +10,7 @@ function* postLoginSaga({ payload }: ReturnType<typeof postLogin.request>) {
       LOGIN_URL,
       payload.data
     );
-
+    console.log("test");
     yield put(setUser(response.data));
     payload.onSuccess(response.data);
   } catch (err: any) {

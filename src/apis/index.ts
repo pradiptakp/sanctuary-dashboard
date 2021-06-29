@@ -1,4 +1,8 @@
-const HOST_URL = "http://localhost:3002";
+const HOST_URL = `${
+  process.env.REACT_APP_ENV === "DEV"
+    ? "http://127.0.0.1:3002"
+    : process.env.REACT_APP_HOST_URL
+}`;
 const API_URL = `${HOST_URL}/api`;
 export const SOCKET_URL = `${HOST_URL}`;
 

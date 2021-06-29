@@ -7,6 +7,7 @@ import { ReactComponent as WelcomeSVG } from "../assets/images/welcome.svg";
 import { getDashboardInfo } from "../redux/actions/appActions";
 import { DashboardData } from "../types";
 import ClipLoader from "react-spinners/ClipLoader";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,8 @@ const Home = () => {
   React.useEffect(() => {
     dispatch(
       getDashboardInfo.request({
-        onFailure: () => {
+        onFailure: (err) => {
+          toast.error(err.message);
           setLoading(false);
         },
         onSuccess: (res) => {

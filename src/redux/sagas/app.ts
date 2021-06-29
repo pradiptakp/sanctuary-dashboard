@@ -15,7 +15,7 @@ function* getDashboardSaga({
     payload.onSuccess(response.data);
   } catch (err: any) {
     console.error(err.response);
-    payload.onFailure();
+    payload.onFailure(err.response?.data);
   }
 }
 

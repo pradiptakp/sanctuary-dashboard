@@ -6,7 +6,7 @@ export const Card: React.FC<{
 }> = ({ title, children, className }) => {
   return (
     <div
-      className={`bg-white dark:bg-blueGray-800 shadow-md rounded-lg overflow-hidden text-blueGray-900 dark:text-white py-6 px-8 ${className} `}
+      className={`bg-white shadow-md rounded-lg overflow-hidden text-blueGray-900 py-6 px-8 ${className} `}
     >
       {title && (
         <div className="flex flex-col mb-2">
