@@ -24,11 +24,17 @@ export const Navbar = ({
 
   const onLogout = () => {
     removeCookie("keyrock_token", {
-      domain: "localhost",
+      domain:
+        process.env.REACT_APP_ENV === "DEV"
+          ? "http://127.0.0.1:3002"
+          : process.env.REACT_APP_HOST_URL,
       path: "/",
     });
     removeCookie("token", {
-      domain: "localhost",
+      domain:
+        process.env.REACT_APP_ENV === "DEV"
+          ? "http://127.0.0.1:3002"
+          : process.env.REACT_APP_HOST_URL,
       path: "/",
     });
     dispatch(postLogout());

@@ -102,6 +102,40 @@ const Home = () => {
               <i className={`fas fa-users text-xl text-lightBlue-600`} />
             </div>
           </Card>
+          <a
+            href="https://www.dropbox.com/s/h4fiex7nacxc6ip/sanctuary.apk"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Card className="bg-gradient-to-tr from-lightBlue-900 to-lightBlue-700 shadow-none h-full hover:shadow-md transform hover:scale-105 transition">
+              <div className="rounded-full w-12 h-12 flex items-center justify-center bg-white bg-opacity-50">
+                <i className="fas fa-mobile-alt text-2xl text-lightBlue-900" />
+              </div>
+              <div className="text-lg font-bold text-white mt-5">
+                Download Mobile App
+              </div>
+              <div className="mt-1 text-blueGray-200">
+                Click here to download Sanctuary Smarthome mobile application
+              </div>
+            </Card>
+          </a>
+          <a
+            href="https://www.dropbox.com/s/wtrpy4eorhnyjby/Sanctuary%201.0.0.exe"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Card className="bg-gradient-to-tr from-lightBlue-900 to-lightBlue-700 shadow-none h-full hover:shadow-md transform hover:scale-105 transition">
+              <div className="rounded-full w-12 h-12 flex items-center justify-center bg-white bg-opacity-50">
+                <i className="fas fa-desktop text-2xl text-lightBlue-900" />
+              </div>
+              <div className="text-lg font-bold text-white mt-5">
+                Download Desktop App
+              </div>
+              <div className="mt-1 text-blueGray-200">
+                Click here to download Sanctuary Smarthome desktop application
+              </div>
+            </Card>
+          </a>
         </div>
       )}
     </div>

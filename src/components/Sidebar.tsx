@@ -47,7 +47,7 @@ export const Sidebar = () => {
       <div className="text-blueGray-800 dark:text-gray-400 flex-1 flex flex-col justify-center mb-16">
         {routes.map((v) => {
           const isActive = v.path === pathname;
-          if (!v.admin || (user && user.userData.admin)) {
+          if (!v.admin || (user && user?.userData?.admin)) {
             return (
               <Link
                 to={v.path ?? ""}
